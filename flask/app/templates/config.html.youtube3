@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Instellingen{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid d-flex flex-column flex-md-row">
+
+
+  <nav class="nav-pills navbar-expand-md bg-light d-flex flex-md-column flex-md-shrink-0">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarLeft" aria-controls="navbarLeft" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse align-items-start p-4" id="navbarLeft">
+      <div class="navbar-nav d-flex flex-md-column text-center text-md-start">
+        <a class="nav-link mb-3 active" aria-current="page" href="#"><span class="fs-4">Algemeen</span></a>
+        <a class="nav-link mb-3" href="#"><span class="fs-4">Traccar</span></a>
+      </div>
+    </div>
+  </nav>
+
+
+  <main class="ps-0 ps-md-5 pt-3">
+    <h1>Algemene configuratie</h1>
+
+
+    <h2>Eerste config item</h2>
+    <p>{{msg}}</p>
+
+
+  </main>
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,8 @@
+flask/.env
+flask/env/
+flask/__pycache__/
+flask/app/__pycache__/
+flask/app/traccar/__pycache__/
+flask/app/config/__pycache__/
+flask/app/tools/__pycache__/
+

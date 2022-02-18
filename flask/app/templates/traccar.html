@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Traccar{% endblock %}
+
+{% block content %}
+<div class="container pt-3 pb-5">
+
+
+  <h1>Exporteer tracks uit Traccar</h1>
+
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <div class="row justify-content-between">
+      <div class="col-12 col-lg-5 pt-4">
+        <fieldset class="form-group">
+          <legend class="border-bottom mb-4">Selecteer device en periode</legend>
+          <div class="form-group mb-4">
+            {{ form.device.label(class="form-control-label mb-2") }}
+            {{ form.device(class="form-control") }}
+          </div>
+          <div class="row">
+            <div class="form-group mb-4 col-md-6">
+              {{ form.startdate.label(class="form-control-label mb-2") }}
+              {{ form.startdate(class="form-control") }}
+            </div>
+            <div class="form-group mb-4 col-md-6">
+              {{ form.enddate.label(class="form-control-label mb-2") }}
+
+              {% if form.enddate.errors %}
+                {{ form.enddate(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.enddate.errors %}
+                    <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+              {% else %}
+                {{ form.enddate(class="form-control") }}
+              {% endif %}
+
+            </div>
+          </div>
+        </fieldset>
+        <div class="form-group mt-4">
+          {{ form.show(class="btn btn-primary") }}
+        </div>
+      </div>
+
+      {% if map %}
+        <div class="col-6 pt-4">
+          {{ map | safe }}
+          {{ form.download(class="btn btn-primary mt-2") }}
+        </div>
+      {% endif %}
+
+    </div>
+  </form>
+
+
+</div>
+{% endblock %}

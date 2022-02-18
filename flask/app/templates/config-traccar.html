@@ -1,0 +1,38 @@
+{% extends "base-config.html" %}
+
+
+{% block config_content %}
+
+<div class="container ps-md-5 pt-3 pb-5">
+  <h1>Traccar instellingen</h1>
+
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+
+    <div class="row">
+      <div class="col-12 col-lg-5">
+        <div class="fs-4 pt-4 border-bottom mb-4">Event receiver</div>
+
+        <div class="row mb-2 justify-content-between align-items-lg-center">
+          <div class="col-6 fw-bold">Event</div>
+          <div class="col-2 fw-bold text-center">Status</div>
+          <div class="col-4 text-end"> </div>
+        </div>
+
+        {% for event in events %}
+          <div class="row mb-2 justify-content-between align-items-lg-center">
+            <div class="col-6">{{ event.type }}</div>
+            <div class="col-2 text-center">{{ event.status }}</div>
+            <div class="col-4  text-center">{{ form[event.type+'_'+event.status](class="btn btn-primary") }}</div>
+          </div>
+        {% endfor %}
+
+
+      </div>
+    </div>
+
+  </form>
+
+
+</div>
+{% endblock %}

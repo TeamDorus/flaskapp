@@ -1,0 +1,36 @@
+{% extends "base-config.html" %}
+
+
+{% block config_content %}
+
+<div class="container ps-md-5 pt-3 pb-5">
+  <h1>Algemene instellingen</h1>
+
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+
+    <div class="row">
+      <div class="col-12 col-lg-8">
+        <div class="fs-4 pt-4 border-bottom mb-4">Telegram</div>
+
+        <div class="row justify-content-between align-items-lg-center">
+          <div class="col-12 col-lg-10 mb-2">
+            <span class="fw-bold">API token:</span> {{ token }}<br>
+            <span class="fw-bold">Chat Id:</span> {{ chat }}<br>
+          </div>
+          <div class="col-2 mb-2">
+            <div class="form-group">
+              {{ form.test(class="btn btn-primary") }}
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </form>
+
+
+</div>
+{% endblock %}
