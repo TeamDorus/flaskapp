@@ -3,6 +3,7 @@ flask/venv/
 flask/__pycache__/
 flask/app/__pycache__/
 flask/app/traccar/__pycache__/
+flask/app/nordvpn/__pycache__/
 flask/app/config/__pycache__/
 flask/app/tools/__pycache__/
 

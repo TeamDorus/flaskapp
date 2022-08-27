@@ -2,5 +2,6 @@ venv/
 __pycache__/
 app/__pycache__/
 app/traccar/__pycache__/
+app/nordvpn/__pycache__/
 app/config/__pycache__/
 app/tools/__pycache__/

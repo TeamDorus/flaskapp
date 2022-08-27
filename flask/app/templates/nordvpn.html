@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}NordVPN{% endblock %}
+
+{% block content %}
+<div class="container pt-3 pb-5">
+
+
+  <h1>Zoek NordVPN wiregard gegevens op</h1>
+
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <div class="row justify-content-between">
+      <div class="col-12 col-lg-5 pt-4">
+        <fieldset class="form-group">
+          <legend class="border-bottom mb-4">Selecteer land</legend>
+          <div class="form-group mb-4">
+            {{ form.country.label(class="form-control-label mb-2") }}
+            {{ form.country(class="form-control") }}
+          </div>
+          <div class="row">
+            <div class="form-group mb-4 col-md-6">
+              {{ form.num.label(class="form-control-label mb-2") }}
+
+              {% if form.num.errors %}
+                {{ form.num(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.num.errors %}
+                    <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+              {% else %}
+                {{ form.num(class="form-control") }}
+              {% endif %}
+
+            </div>
+            <div>
+          </div>
+        </fieldset>
+        <div class="form-group mt-2 mb-4">
+          {{ form.show(class="btn btn-primary") }}
+        </div>
+      </div>
+    </div>
+
+    {% if server_info %}
+    <div class="col-12 pt-4">
+
+      <table class="table">
+        <thead class="table-primary">
+          <tr>
+            <th>Hostname</th>
+            <th>IP adres</th>
+            <th>Public key</th>
+            <th>Locatie</th>
+            <th>Load</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for server in server_info %}
+          <tr>
+            <td>{{ server['hostname'] }}</td>
+            <td>{{ server['ipv4'] }}</td>
+            <td>{{ server['pubkey'] }}</td>
+            <td>{{ server['city'] }}</td>
+            <td>{{ server['load'] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endif %}
+
+    
+  </form>
+
+
+</div>
+{% endblock %}

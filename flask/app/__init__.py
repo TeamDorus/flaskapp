@@ -15,9 +15,11 @@ from app import routes
 
 # Blueprint routes
 from app.traccar.routes import traccar
+from app.nordvpn.routes import nordvpn
 from app.config.routes import config
 
 app.register_blueprint(traccar)
+app.register_blueprint(nordvpn)
 app.register_blueprint(config)
 
 
