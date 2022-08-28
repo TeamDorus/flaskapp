@@ -5,6 +5,8 @@ services:
   flask:
     build: ./flask
     container_name: flask
+    volumes:
+      - "/opt/docker/flask/webapp.db:/app/app/webapp.db"
     restart: unless-stopped
     expose:
       - 8080
