@@ -1,27 +1,18 @@
-import urllib.request
+import urllib.request, base64
 import json
 from datetime import datetime
 from app import app
 
 
-def traccar_api_login():
-  # login stuff
-  password_mgr = urllib.request.HTTPPasswordMgrWithDefaultRealm()
-  password_mgr.add_password(None, app.config['TRACCAR_BASE_URL'], app.config['TRACCAR_API_USER'], app.config['TRACCAR_API_PASS'])
-  handler = urllib.request.HTTPBasicAuthHandler(password_mgr)
-  opener = urllib.request.build_opener(handler)
-  opener.open(app.config['TRACCAR_BASE_URL'])
-  urllib.request.install_opener(opener)
-
-
-
 def get_devices():
-  # login
-  traccar_api_login()
   # api call
+  userpass = f"{app.config['TRACCAR_API_USER']}:{app.config['TRACCAR_API_PASS']}"
   request_url = f"{app.config['TRACCAR_BASE_URL']}/api/devices"
-  req = urllib.request.urlopen(request_url)
-  device_info = json.loads(req.read())
+  b64auth = base64.b64encode(userpass.encode()).decode()
+  request = urllib.request.Request(request_url)
+  request.add_header("Authorization", "Basic %s" % b64auth)
+  result = urllib.request.urlopen(request)
+  device_info = json.loads(result.read())
   # maak een lijst met voor ieder device een tuple (id, naam)
   device_list = []
   for dev in device_info:
@@ -29,15 +20,16 @@ def get_devices():
   return device_list
 
 
-
 def get_track(device_id, startdate, enddate):
-  # login
-  traccar_api_login()
   # api call
+  userpass = f"{app.config['TRACCAR_API_USER']}:{app.config['TRACCAR_API_PASS']}"
   request_url = f"{app.config['TRACCAR_BASE_URL']}/api/reports/route?_dc=1619800977916&deviceId={device_id}&type=allEvents&from={startdate}T00%3A00%3A00%2B02%3A00&to={enddate}T23%3A59%3A59%2B02%3A00&daily=false&mail=false"
-  req = urllib.request.urlopen(request_url)
-  return json.loads(req.read())
-
+  b64auth = base64.b64encode(userpass.encode()).decode()
+  request = urllib.request.Request(request_url)
+  request.add_header("Authorization", "Basic %s" % b64auth)
+  request.add_header("Accept", "application/json")
+  result = urllib.request.urlopen(request)
+  return json.loads(result.read())
 
 
 def generate_pointlist(jsontrack):
